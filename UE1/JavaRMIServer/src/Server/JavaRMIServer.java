@@ -19,15 +19,14 @@ import java.util.logging.Logger;
  *
  * @author Tobias
  */
-public class Server {
+public class JavaRMIServer {
 
-    public Server() {
+    public JavaRMIServer() {
     }
 
     ;
     
     public static void main(String[] args) {
-
         try {
             SquareImpl square = new SquareImpl();
             ISquare stub = (ISquare) UnicastRemoteObject.exportObject(square, 0);
@@ -38,7 +37,7 @@ public class Server {
             System.out.println("Square Server is ready to listen...");
 
         } catch (RemoteException | AlreadyBoundException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JavaRMIServer.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }
