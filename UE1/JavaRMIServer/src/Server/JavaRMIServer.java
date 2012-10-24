@@ -31,12 +31,12 @@ public class JavaRMIServer {
             SquareImpl square = new SquareImpl();
             ISquare stub = (ISquare) UnicastRemoteObject.exportObject(square, 0);
 
-            Registry registry = LocateRegistry.getRegistry();
-            registry.bind("Square", stub);
+            Registry registry = LocateRegistry.createRegistry(33333);
+            registry.rebind("Square", stub);
 
             System.out.println("Square Server is ready to listen...");
 
-        } catch (RemoteException | AlreadyBoundException ex) {
+        } catch (RemoteException ex) {
             Logger.getLogger(JavaRMIServer.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }

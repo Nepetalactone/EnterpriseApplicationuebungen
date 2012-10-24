@@ -30,7 +30,7 @@ public class Client {
         }
         
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost");
+            Registry registry = LocateRegistry.getRegistry("localhost", 33333);
             stub = (ISquare)registry.lookup("Square");
         } catch (NotBoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
