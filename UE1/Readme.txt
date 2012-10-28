@@ -1,2 +1,2 @@
-1. Server starten
-2. Client starten mit Argumenten IP-Adresse und Nummer die quadriert werden soll
+1. JavaRMIServer starten
+2. JavaRMIApplication starten mit Argumenten IP-Adresse und Nummer die quadriert werden soll
