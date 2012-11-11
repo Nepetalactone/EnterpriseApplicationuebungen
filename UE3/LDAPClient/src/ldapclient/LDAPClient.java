@@ -120,7 +120,9 @@ public class LDAPClient {
             sc.setReturningAttributes(attributeFilter);
             sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
             
-            NamingEnumeration results = dctx.search(base, "", sc);
+            String filter = "(cn=*)";
+            
+            NamingEnumeration results = dctx.search(base, filter, sc);
             while(results.hasMore()){
                 SearchResult sr = (SearchResult) results.next();
                 Attributes attrs = sr.getAttributes();
