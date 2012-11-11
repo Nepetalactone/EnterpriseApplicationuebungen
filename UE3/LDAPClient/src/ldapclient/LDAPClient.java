@@ -34,6 +34,7 @@ public class LDAPClient {
 
     public LDAPClient(String[] args) throws IOException {
         try {
+            //setup
             env = new Hashtable();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
             env.put(Context.PROVIDER_URL, "ldap://" + args[0] + ":10389/o=home");
@@ -44,7 +45,7 @@ public class LDAPClient {
 
             String choice = "help";
             boolean first = true;
-            while (!choice.equalsIgnoreCase("exit")) {
+            while (!choice.equalsIgnoreCase("exit")) { //process Userinput
                 if (first == false) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
                     choice = in.readLine();
@@ -63,18 +64,20 @@ public class LDAPClient {
                     case ("searchMachines"):
                         searchMachines();
                         break;
+                        
+                    case ("exit"):
+                        break;
 
                     default:
                         System.out.println("Didn't understand input");
                 }
             }
-            Attributes attrib = initContext.getAttributes("cn=Tobias, ou=users");
-            System.out.println(attrib.get("sn").toString());
         } catch (NamingException ex) {
             Logger.getLogger(LDAPClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //display help
     private void showHelp() {
         System.out.println("help = shows the available commands\n"
                 + "searchUsers = search for the surnames of all users\n"
@@ -82,7 +85,8 @@ public class LDAPClient {
                 + "exit = close the program");
     }
 
-    private void searchMachines() {
+    //searches and prints common names of machines
+    private void searchMachines() { 
         try {
             DirContext dctx = new InitialDirContext(env);
 
@@ -93,7 +97,7 @@ public class LDAPClient {
             sc.setReturningAttributes(attributeFilter);
             sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
             
-            String filter = "cn=*";
+            String filter = "(cn=*)";
             
             NamingEnumeration results = dctx.search(base, filter, sc);
             while(results.hasMore()){
@@ -110,7 +114,8 @@ public class LDAPClient {
         }
 
     }
-
+    
+    //searches and prints surnames of users
     private void searchUsers() {
         try {
             DirContext dctx = new InitialDirContext(env);
@@ -118,7 +123,7 @@ public class LDAPClient {
             String base = "ou=users";
 
             SearchControls sc = new SearchControls();
-            String[] attributeFilter = {"cn"};
+            String[] attributeFilter = {"cn", "sn"};
             sc.setReturningAttributes(attributeFilter);
             sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
             

@@ -1,0 +1,76 @@
+version: 1
+
+dn: o=home
+objectClass: organization
+objectClass: top
+o: home
+
+dn: ou=groups,o=home
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=home
+objectClass: organizationalUnit
+objectClass: top
+ou: home
+
+dn: ou=machines,o=home
+objectClass: organizationalUnit
+objectClass: top
+ou: machines
+
+dn: ou=users,o=home
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: cn=Brother,ou=users,o=home
+objectClass: person
+objectClass: top
+cn: Brother
+sn: Meusburger
+
+dn: cn=Father,ou=users,o=home
+objectClass: person
+objectClass: top
+cn: Father
+sn: Meusburger
+
+dn: cn=Mother,ou=users,o=home
+objectClass: person
+objectClass: top
+cn: Mother
+sn: Meusburger
+
+dn: cn=Router,ou=machines,o=home
+objectClass: device
+objectClass: top
+cn: Router
+
+dn: cn=Scanner,ou=machines,o=home
+objectClass: device
+objectClass: top
+cn: Scanner
+
+dn: cn=Tobias,ou=users,o=home
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Tobias
+sn: Meusburger
+uid: tobi
+userPassword:: YXNkZg==
+
+dn: cn=Tobias-PC,ou=machines,o=home
+objectClass: device
+objectClass: top
+cn: Tobias-PC
+
+dn: cn=user,ou=groups,o=home
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: user
+uniqueMember: cn=Tobias, ou=users, o=home
+
