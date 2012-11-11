@@ -27,7 +27,7 @@ public class Client {
 
     private Client() {
     }
-
+    
     ;
     
     public static void main(String[] args) throws IOException {
