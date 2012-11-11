@@ -11,10 +11,7 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.*;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
-import javax.naming.directory.SearchResult;
+import javax.naming.directory.*;
 
 /**
  *
@@ -81,21 +78,31 @@ public class LDAPClient {
     private void showHelp() {
         System.out.println("help = shows the available commands\n"
                 + "searchUsers = search for the surnames of all users\n"
-                + "searchMachine = search for the common names of the devices in the environment\n"
+                + "searchMachines = search for the common names of the devices in the environment\n"
                 + "exit = close the program");
     }
 
     private void searchMachines() {
         try {
-            DirContext context = new InitialDirContext(env);
-            NamingEnumeration asdf = initContext.list("ou=machines");
-            while(asdf.hasMore()){
-                SearchResult sr = (SearchResult) asdf.next();
-                Attributes attr = sr.getAttributes();
-                System.out.println(attr.get("cn"));
-            }
-            Attributes attrib = initContext.getAttributes("ou=users");
+            DirContext dctx = new InitialDirContext(env);
+
+            String base = "ou=machines";
+
+            SearchControls sc = new SearchControls();
+            String[] attributeFilter = {"cn"};
+            sc.setReturningAttributes(attributeFilter);
+            sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
             
+            NamingEnumeration results = dctx.search(base, "", sc);
+            while(results.hasMore()){
+                SearchResult sr = (SearchResult) results.next();
+                Attributes attrs = sr.getAttributes();
+                
+                Attribute attr = attrs.get("cn");
+                System.out.println(attr.get());
+            }
+            dctx.close();
+
         } catch (NamingException ex) {
             Logger.getLogger(LDAPClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -103,6 +110,28 @@ public class LDAPClient {
     }
 
     private void searchUsers() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        try {
+            DirContext dctx = new InitialDirContext(env);
+
+            String base = "ou=users";
+
+            SearchControls sc = new SearchControls();
+            String[] attributeFilter = {"cn"};
+            sc.setReturningAttributes(attributeFilter);
+            sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
+            
+            NamingEnumeration results = dctx.search(base, "", sc);
+            while(results.hasMore()){
+                SearchResult sr = (SearchResult) results.next();
+                Attributes attrs = sr.getAttributes();
+                
+                Attribute attr = attrs.get("sn");
+                System.out.println(attr.get());
+            }
+            dctx.close();
+
+        } catch (NamingException ex) {
+            Logger.getLogger(LDAPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
