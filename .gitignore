@@ -16,3 +16,9 @@
 /UE2.5/ATMServer/dist/
 /UE3/LDAPClient/nbproject/private/
 /UE3/LDAPClient/build/
+/UE4/CorbaServer/nbproject/private/
+/UE4/CorbaClient/nbproject/private/
+/UE4/CorbaServer/build/
+/UE4/CorbaServer/dist/
+/UE4/CorbaClient/build/
+/UE4/CorbaClient/dist/
