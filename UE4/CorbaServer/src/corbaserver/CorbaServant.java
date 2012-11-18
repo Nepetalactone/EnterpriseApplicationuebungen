@@ -20,6 +20,7 @@ public class CorbaServant extends cookieserverPOA {
     private ORB orb;
     BufferedReader reader = null;
     String result = null;
+    StringBuffer buffer = null;
 
     public void setORB(ORB orb_val) {
         orb = orb_val;
@@ -29,41 +30,65 @@ public class CorbaServant extends cookieserverPOA {
     public String printCookieNum(int i) {
         BufferedReader reader = null;
         String result = null;
+        buffer = new StringBuffer();
         try {
             int j = 0;
             reader = new BufferedReader(new InputStreamReader(CorbaServant.class.getResourceAsStream("/fortunes/fortunes.txt")));
+            result = reader.readLine();
             while (j < i) {
                 result = reader.readLine();
-                j++;
+                if (result.equalsIgnoreCase("%")) {
+                    j++;
+                }
             }
-            reader.close();
-            return result;
+            result = reader.readLine();
+            while (!result.equalsIgnoreCase("%")) {
+                buffer.append(result);
+                buffer.append("\n");
+                j++;
+                result = reader.readLine();
+            }
         } catch (IOException ex) {
             Logger.getLogger(CorbaServant.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result;
+        try {
+            reader.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CorbaServant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return buffer.toString();
     }
 
     @Override
     public String printCookie() {
         Random generator = new Random();
-        int i = generator.nextInt(16304);
+        int i = generator.nextInt(3583);
         int j = 0;
-        reader = new BufferedReader(new InputStreamReader(CorbaServant.class.getResourceAsStream("/fortunes/fortunes.txt")));
-
-        while (j < i) {
-            try {
+        buffer = new StringBuffer();
+        try {
+            reader = new BufferedReader(new InputStreamReader(CorbaServant.class.getResourceAsStream("/fortunes/fortunes.txt")));
+            result = reader.readLine();
+            while (j < i) {
                 result = reader.readLine();
-                j++;
-            } catch (IOException ex) {
-                Logger.getLogger(CorbaServant.class.getName()).log(Level.SEVERE, null, ex);
+                if (result.equalsIgnoreCase("%")) {
+                    j++;
+                }
             }
+            result = reader.readLine();
+            while (!result.equalsIgnoreCase("%")) {
+                buffer.append(result);
+                buffer.append("\n");
+                j++;
+                result = reader.readLine();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CorbaServant.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             reader.close();
         } catch (IOException ex) {
             Logger.getLogger(CorbaServant.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result;
+        return buffer.toString();
     }
 }

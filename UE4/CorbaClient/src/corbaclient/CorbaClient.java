@@ -34,6 +34,7 @@ public class CorbaClient {
             
             int i = Integer.parseInt(args[4]);
             System.out.println(servant.printCookieNum(i));
+            System.out.println();
             System.out.println(servant.printCookie());
         } catch (NotFound ex) {
             Logger.getLogger(CorbaClient.class.getName()).log(Level.SEVERE, null, ex);
