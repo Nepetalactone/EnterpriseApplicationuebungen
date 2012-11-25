@@ -21,7 +21,7 @@ public class TopicMessageListener implements MessageListener{
     public void onMessage(Message msg) {
         TextMessage message = (TextMessage) msg;
         try {
-            System.out.println(message.getText());
+            System.out.println("Received message:" + message.getText());
         } catch (JMSException ex) {
             Logger.getLogger(TopicMessageListener.class.getName()).log(Level.SEVERE, null, ex);
         }

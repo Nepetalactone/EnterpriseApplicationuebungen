@@ -4,6 +4,11 @@
  */
 package subscriber;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -38,8 +43,27 @@ public class Subscriber {
         messageConsumer.setMessageListener(new TopicMessageListener());
         connection.start();
         
-        while (true){
-            
+        System.out.println("Connection established. Enter 'q' to quit");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String quit = null;
+        try {
+            quit = reader.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(Subscriber.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        while (quit != "q"){
+            try {
+                quit = reader.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(Subscriber.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        messageConsumer.close();
+        System.out.println("MessageConsumer closed");
+        session.close();
+        System.out.println("Session closed");
+        connection.close();
+        System.out.println("Connection closed");
     }
 }

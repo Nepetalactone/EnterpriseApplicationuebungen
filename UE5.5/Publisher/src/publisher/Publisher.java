@@ -37,9 +37,9 @@ public class Publisher {
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             messageProducer = session.createProducer(topic);
             textMessage = session.createTextMessage();
-            textMessage.setText("asdfasdf");
+            textMessage.setText(args[0]);
             messageProducer.send(textMessage);
-            System.out.println("asdfasdf");
+            System.out.println(args[0]);
             messageProducer.close();
             session.close();
             connection.close();
