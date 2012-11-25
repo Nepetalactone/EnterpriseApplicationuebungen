@@ -22,3 +22,12 @@
 /UE4/CorbaServer/dist/
 /UE4/CorbaClient/build/
 /UE4/CorbaClient/dist/
+/UE5/Publisher/nbproject/private/
+/UE5/Subscriber/nbproject/private/
+/UE5/Publisher/build/
+/UE5.5/Publisher/nbproject/private/
+/UE5.5/Publisher/build/
+/UE5.5/Publisher/dist/
+/UE5.5/Subscriber/nbproject/private/
+/UE5.5/Subscriber/dist/
+/UE5.5/Subscriber/build/
