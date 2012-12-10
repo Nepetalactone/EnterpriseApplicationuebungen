@@ -63,7 +63,7 @@ public class Main {
         
         System.out.println("CurrentShop: " + remote.getCurrentShopName());
         
-        remote.changeFruitShopByName("ThirdName");
+        remote.changeFruitShopByName("ThirdShop");
         
         System.out.println("BasketContent4: " + remote.getBasketContent());
         
