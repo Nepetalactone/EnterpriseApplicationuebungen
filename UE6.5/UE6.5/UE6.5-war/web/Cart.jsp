@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 09.12.2012, 23:21:23
+    Document   : Cart
+    Created on : 11.12.2012, 21:08:19
     Author     : Tobias
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Index</title>
+        <title>Cart</title>
     </head>
     <body>
-        <h1>Shopselection</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>
