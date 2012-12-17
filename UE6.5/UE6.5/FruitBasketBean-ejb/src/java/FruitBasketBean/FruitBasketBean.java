@@ -185,8 +185,9 @@ public class FruitBasketBean implements FruitBasketBeanRemote, FruitBasketBeanLo
         
         for (Fruit fruit : fruitColl){
             if (fruit.name.equals(name)){
-                content.remove(fruit.id);
+                fruit.setNumber(fruit.getNumber() - 1);
                 currentFruitShop.addFruit(fruit);
+                return;
             }
         }
     }
@@ -211,8 +212,13 @@ public class FruitBasketBean implements FruitBasketBeanRemote, FruitBasketBeanLo
                             }
                         }
                         if (fruitExists == false) {
-                            fruit.setNumber(1);
-                            content.put(fruit.getId(), fruit);
+                            
+                            Fruit newFruit = new Fruit();
+                            newFruit.id = fruit.getId();
+                            newFruit.name = fruit.getName();
+                            newFruit.price = fruit.getPrice();
+                            newFruit.number = 1;
+                            content.put(newFruit.getId(), newFruit);
                             return;
                         }
                     }
